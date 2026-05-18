@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KVIM202 Quad View - Electron</title>
+    <style>
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #111;
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+        }
+
+        .quad-root {
+            width: 100vw;
+            height: 100vh;
+            box-sizing: border-box;
+            padding: 4px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 4px;
+            background: #111;
+        }
+
+        .quad-cell {
+            position: relative;
+            min-width: 0;
+            min-height: 0;
+            overflow: hidden;
+            border: 1px solid #444;
+            background: #000;
+        }
+
+        .quad-cell iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+            background: #000;
+        }
+
+        .slot-label {
+            position: absolute;
+            left: 8px;
+            top: 8px;
+            z-index: 10;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
+            font-size: 12px;
+            line-height: 18px;
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="quad-root" class="quad-root"></div>
+
+    <script>
+        // 預設載入 index.html。
+        // 如果你目前檔名是 kvim202.html，可以用：quad_electron.html?page=kvim202.html
+        const params = new URLSearchParams(location.search);
+        const childPage = params.get("page") || "index1.html";
+        const root = document.getElementById("quad-root");
+
+        function buildChildUrl(slot) {
+            const url = new URL(childPage, location.href);
+            url.searchParams.set("slot", String(slot));
+            return url.toString();
+        }
+
+        for (let slot = 1; slot <= 4; slot++) {
+            const cell = document.createElement("div");
+            cell.className = "quad-cell";
+
+            const label = document.createElement("div");
+            label.className = "slot-label";
+            label.textContent = `JVK202-${slot}`;
+
+            const iframe = document.createElement("iframe");
+
+            // 重要：先設定 allow，再設定 src。
+            // Electron / Chromium 在 iframe 內使用 camera / microphone / serial 時，
+            // 子 frame 必須被明確授權，否則會出現：
+            // Permissions policy violation: xxx is not allowed in this document.
+            iframe.setAttribute(
+                "allow",
+                [
+                    "camera *",
+                    "microphone *",
+                    "serial *",
+                    "clipboard-read *",
+                    "clipboard-write *",
+                    "fullscreen *",
+                    "picture-in-picture *"
+                ].join("; ")
+            );
+
+            // 不再另外設定 iframe.allowFullscreen，避免：
+            // allow attribute will take precedence over 'allowfullscreen'
+            iframe.src = buildChildUrl(slot);
+
+            cell.appendChild(label);
+            cell.appendChild(iframe);
+            root.appendChild(cell);
+        }
+    </script>
+</body>
+</html>

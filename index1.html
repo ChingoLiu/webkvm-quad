@@ -1156,6 +1156,8 @@
             }
     </style>
 
+    <script src="dictionary.js"></script>
+    <script src="settingsStorage.js"></script>
     <script src="chart.js"></script>
     <script type="module" src="kvim202.o.js"></script>
 </head>
@@ -1438,6 +1440,18 @@
                     </div>
 
                     <div>
+                        <button id="quad-frame-max-btn" class="toggleable-btn" style="display:none;">
+                            <span class="btn-icon">
+                                <img data-icon-light="icon/fullscreen_light.png"
+                                    data-icon-dark="icon/fullscreen_dark.png"
+                                    alt="quad-max"
+                                    class="div_icon">
+                            </span>
+                            <span class="btn-text" data-i18n="window.quadMax">滿版</span>
+                        </button>
+                    </div>
+
+                    <div>
                         <button id="snapshot-btn" class="toggleable-btn">
                             <span class="btn-icon"><img data-icon-light="icon/snapshot_light.png" data-icon-dark="icon/snapshot_dark.png" alt="snapshot" class="div_icon"></span>
                             <span class="btn-text" data-i18n="window.snapshot">螢幕截圖</span>
@@ -1567,6 +1581,8 @@
                         <span class="btn-icon"><img data-icon-light="icon/settings_light.png" data-icon-dark="icon/settings_dark.png" alt="settings" class="div_icon"></span>
                     </button>
                 </div>
+
+                <div id="slotLabel" class="title1" style="justify-content: center; margin-top: 2px;"></div>
             </div>
         </div>
 
@@ -1689,8 +1705,6 @@
                     <div class="serial-label" data-i18n="setting.mouseReportMode">鼠標回報率</div>
                     <div class="serial-input">
                         <select id="id_select_mouse_report_mode">
-                            <option value="mouse" selected data-i18n="setting.mouseReportLow">一般模式</option>
-                            <option value="pointer" data-i18n="setting.mouseReportHigh">電競模式</option> 
                         </select>
                     </div>
                 </div>
@@ -1700,11 +1714,6 @@
                     <div class="serial-label" data-i18n="setting.relCursorSpeed">相對滑鼠速度</div>
                     <div class="serial-input">
                         <select id="id_select_relative_mouse_speed">
-                            <option value="2.0" data-i18n="setting.relCursorSuperFast">最快</option>
-                            <option value="1.5" data-i18n="setting.relCursorFast">快</option>
-                            <option value="1" selected data-i18n="setting.relCursorMedium">中</option>
-                            <option value="0.7" data-i18n="setting.relCursorSlow">慢</option>
-                            <option value="0.4" data-i18n="setting.relCursorSuperSlow">最慢</option>
                         </select>
                     </div>
                 </div>
@@ -1713,15 +1722,6 @@
                     <div class="serial-label" data-i18n="setting.scrollSpeed">滾輪速度</div>
                     <div class="serial-input">
                         <select id="id_select_scrollspeed">
-                            <option value="1" selected>1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
                         </select>
                     </div>
                 </div>
@@ -1731,8 +1731,6 @@
                     <div class="serial-label" data-i18n="setting.scrollDirection">滾輪方向</div>
                     <div class="serial-input">
                         <select id="id_select_direction">
-                            <option value="-1" selected data-i18n="setting.scrollNormal">一般</option>
-                            <option value="1" data-i18n="setting.scrollReverse">反向</option>
                         </select>
                     </div>
                 </div>
@@ -1744,8 +1742,8 @@
                     <div class="serial-label" data-i18n="setting.language">語言</div>
                     <div class="serial-input">
                         <select id="lang-select">
-                            <option value="zh-TW">繁體中文</option>
-                            <option value="en">English</option>
+                            <option value="zh-TW" data-i18n="setting.lan.zhTW">繁體中文</option>
+                            <option value="en" data-i18n="setting.lan.en">English</option>
                         </select>
                     </div>
                 </div>

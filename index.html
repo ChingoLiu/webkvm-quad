@@ -86,21 +86,6 @@
             background: #000;
         }
 
-        .slot-label {
-            position: absolute;
-            left: 10px;
-            top: 3px;
-            z-index: 10;
-            padding: 3px 8px;
-            border-radius: 999px;
-            background: rgba(0, 0, 0, 0.55);
-            color: #fff;
-            font-size: 12px;
-            line-height: 14px;
-            pointer-events: none;
-            user-select: none;
-        }
-
         .quad-settings-modal {
             position: fixed;
             inset: 0;
@@ -113,16 +98,23 @@
         }
 
         .quad-settings-content {
-            width: 1280px;
-            height: 700px;
+            width: auto;
+            height: auto;
             max-width: 1920px;
             max-height: calc(100vh - 42px);
             box-sizing: border-box;
-            padding: 8px;
+            padding: 20px;
             border-radius: 18px;
             background: var(--bg-topbar);
             box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
             overflow: auto;
+        }
+
+        .quad-settings-title-grid {
+            display: grid;
+            grid-template-columns: 2fr max-content 2fr;
+            gap: 6px;
+            align-items: center;
         }
 
         .quad-settings-title {
@@ -131,6 +123,28 @@
             line-height: 20px;
             margin-bottom: 10px;
             letter-spacing: 1px;
+        }
+
+        .quad-link-button {
+            border: 0;
+            background: transparent;
+            box-shadow: none;
+            padding: 0 4px;
+            height: 26px;
+            color: #807e7d;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+            margin-top: 6px;
+        }
+
+        .quad-link-button:hover {
+            opacity: 0.85;
+        }
+
+        .quad-link-button:active {
+            transform: translateY(1px);
         }
 
         .quad-group-row {
@@ -160,8 +174,9 @@
 
         .quad-slot-grid {
             display: grid;
-            grid-template-columns: repeat(4, minmax(260px, 1fr));
+            grid-template-columns: max-content repeat(4, 180px);
             gap: 12px;
+            align-items: start;
         }
 
         .quad-slot-panel {
@@ -172,25 +187,18 @@
             padding: 10px 10px 12px 10px;
             min-width: 0;
             margin-bottom: 10px;
-            width: 288px;
+            width: 160px;
         }
 
-        .quad-slot-panel button {
-            display: inline-flex;
-            flex-direction: column;
-            padding: 2px 4px 2px 4px;
-            width: 120px;
-            height: 28px;
-            justify-content: center;
-            align-items: center;
-            margin-top: 4px;
-            border-radius: 18px;
-            border: 0px;
-            background: var(--bg-topbar);
-            box-shadow: -4px -4px 8px var(--title-shadow-hi),
-                        3px 3px 3px var(--title-shadow-lo);
-            cursor: pointer;
+        .quad-slot-panel select {
+            width: 100%;
+            height: 26px;
+            font-size: 14px;
+            padding: 2px 8px;
             color: var(--text-color);
+            background: var(--bg-topbar);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
         }
 
         .quad-slot-panel button:active {
@@ -205,33 +213,72 @@
             text-align: center;
         }
 
-        .quad-row {
-            display: grid;
-            grid-template-columns: 100px 1fr 52px;
-            align-items: center;
-            column-gap: 6px;
-            
-            margin-bottom: 4px;
+        .quad-title-panel {
+            padding: 10px 0 12px 0;
+            min-width: max-content;
+            margin-bottom: 10px;
         }
 
-        .quad-com-auth-row {
-            grid-template-columns: 100px 1fr 52px;
-            margin-top: -2px;
+        .quad-title-row,
+        .quad-value-row {
+            height: 26px;
+            min-height: 26px;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .quad-title-row {
+            justify-content: flex-start;
+            font-size: 15px;
+            color: var(--text-color);
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .quad-value-row {
+            width: 100%;
+        }
+
+        .quad-state-row {
+            display: grid;
+            grid-template-columns: 1fr 38px;
+            column-gap: 2px;
+            align-items: center;
+            height: 16px;
+            min-height: 16px;
+            margin-bottom: 0px;
+            font-size: 14px;
+            color: var(--text-color);
+            font-weight: bold;
+            white-space: nowrap;
+
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        .quad-com-auth-value-row {
+            display: grid;
+            grid-template-columns: 10px 1fr;
+            column-gap: 6px;
+            align-items: center;
+            margin-top: 0px;
             margin-bottom: 6px;
+            height: 16px;
+            min-height: 16px;
+            font-family: Consolas, "Courier New", monospace;
+            margin-bottom: 14px;
         }
 
         .quad-com-auth {
             min-height: 16px;
             line-height: 16px;
-
             width: max-content;
             max-width: none;
             white-space: nowrap;
             overflow: visible;
-
             justify-self: end;
             text-align: right;
-
             color: #ff8f49;
             font-weight: bold;
             text-decoration: underline;
@@ -239,13 +286,75 @@
             cursor: pointer;
         }
 
-        .quad-row.quad-row-select {
-            grid-template-columns: 100px 1fr;
+        .quad-individual-panel {
+            border-radius: 16px;
+            background: var(--bg-topbar);
+            box-shadow: -4px -4px 8px var(--title-shadow-hi),
+                        3px 3px 3px var(--title-shadow-lo);
+            padding: 10px;
+            min-width: 0;
+            margin-bottom: 10px;
+            margin-right: 10px;
+            width: 260px;
+        }
+
+        .quad-individual-panel button {
+            display: inline-flex;
+            flex-direction: column;
+            padding: 2px 4px 2px 4px;
+            width: 120px;
+            height: 26px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 4px;
+            border-radius: 18px;
+            border: 0px;
+            background: var(--bg-topbar);
+            box-shadow: -4px -4px 8px var(--title-shadow-hi),
+                        3px 3px 3px var(--title-shadow-lo);
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        .quad-individual-panel button:active {
+            transform: translateY(1px);
+        }
+
+        .quad-row {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            justify-content: space-between;
+            column-gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .quad-row select {
+            width: 100%;
+            height: 26px;
+            font-size: 14px;
+            padding: 2px 8px;
+            color: var(--text-color);
+            background: var(--bg-topbar);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+        }
+
+        .quad-button-cell {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .download-btn {
+            color: var(--text-color);
+            text-decoration: underline;
+            white-space: nowrap;
         }
 
         .quad-label {
+            justify-content: flex-start;
             font-size: 15px;
             color: var(--text-color);
+            font-weight: bold;
             white-space: nowrap;
         }
 
@@ -259,7 +368,7 @@
         }
 
         .quad-state {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             text-align: right;
         }
@@ -274,135 +383,6 @@
 
         .quad-state.unknown {
             color: #ccc;
-        }
-
-        .quad-slot-panel select,
-        .quad-shared-panel select {
-            width: 100%;
-            height: 26px;
-            font-size: 14px;
-            padding: 2px 8px;
-            color: var(--text-color);
-            background: var(--bg-topbar);
-            border: 1px solid var(--border-color);
-            box-sizing: border-box;
-        }
-
-        .quad-shared-panel {
-            margin-top: 12px;
-            border-radius: 16px;
-            background: rgba(48, 49, 51, 0.98);
-            box-shadow: -3px -3px 7px rgba(255,255,255,0.08),
-                         4px 4px 10px rgba(0,0,0,0.45);
-            padding: 12px;
-        }
-
-        .quad-shared-title {
-            font-size: 17px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .quad-shared-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            width: 620px;   /* 你可再微調，例如 560 / 600 / 650 */
-        }
-
-        .quad-shared-item {
-            display: grid;
-            grid-template-columns: 110px 1fr;
-            align-items: center;
-            column-gap: 12px;
-        }
-
-        .quad-shared-item label {
-            display: block;
-            font-size: 15px;
-            color: #eee;
-            white-space: nowrap;
-        }
-
-        .quad-shared-item select {
-            width: 100%;
-            height: 26px;
-            font-size: 14px;
-            padding: 2px 8px;
-            color: #fff;
-            background: #3a3b3d;
-            border: 1px solid #737373;
-            box-sizing: border-box;
-        }
-
-        .quad-action-row {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 18px;
-            margin-top: 14px;
-        }
-
-        .quad-action-row button,
-        .quad-floating-settings-btn {
-            height: 38px;
-            min-width: 132px;
-            padding: 0 20px;
-            border: 0;
-            border-radius: 999px;
-            color: #fff;
-            background: #3b3c3f;
-            box-shadow: -3px -3px 7px rgba(255,255,255,0.08),
-                         4px 4px 10px rgba(0,0,0,0.45);
-            font-size: 16px;
-            cursor: pointer;
-            display: none !important;
-        }
-
-        .quad-action-row button:active,
-        .quad-floating-settings-btn:active {
-            transform: translateY(1px);
-        }
-
-        .quad-floating-settings-btn {
-            position: fixed;
-            right: 14px;
-            top: 14px;
-            z-index: 999998;
-            display: none;
-            min-width: 90px;
-            height: 32px;
-            font-size: 14px;
-            background: rgba(40, 40, 40, 0.85);
-        }
-
-        @media (max-width: 1400px) {
-            .quad-settings-content {
-                width: calc(100vw - 16px);
-                max-height: calc(100vh - 16px);
-                padding: 10px;
-            }
-
-            .quad-slot-grid {
-                gap: 8px;
-            }
-
-            .quad-row {
-                grid-template-columns: 100px 1fr 42px;
-            }
-
-            .quad-row.quad-row-select {
-                grid-template-columns: 100px 1fr;
-            }
-
-            .quad-label {
-                font-size: 13px;
-            }
-
-            .quad-shared-grid {
-                
-                grid-template-columns: repeat(4, minmax(120px, 1fr));
-            }
         }
 
         /* 單一 iframe 滿版模式 */
@@ -430,36 +410,36 @@
             width: 100%;
             height: 100%;
         }
-
-        .quad-root.quad-focus-mode .quad-cell.quad-cell-focused .slot-label {
-            display: none;
-        }
-
-        body.quad-focus-mode .quad-floating-settings-btn {
-            display: none !important;
-        }
     </style>
 </head>
 
 <body>
     <div id="quad-root" class="quad-root"></div>
 
-    <button id="quad-open-settings-btn" class="quad-floating-settings-btn" data-i18n="setting.title">設定</button>
-
     <div id="quad-settings-modal" class="quad-settings-modal" tabindex="-1">
         <div class="quad-settings-content">
-            <div class="quad-settings-title" data-i18n="quad.title">選擇 JVK202 Quad 裝置群組</div>
+            <div class="quad-settings-title-grid">
+                <div></div>
+                <div>
+                    <div class="quad-settings-title" data-i18n="quad.title">選擇 JVK202 Quad 裝置群組</div>
 
-            <div class="quad-group-row">
-                <select id="quad-group-select"></select>
+                    <div class="quad-group-row">
+                        <select id="quad-group-select"></select>
+                    </div>
+
+                    <div id="quad-status-line" class="quad-status-line" data-i18n="quad.status.init">初始化中...</div>
+                </div>
+                <div>
+                    <div class="quad-settings-title"></div>
+                    <button id="quad-refresh-btn" data-i18n="setting.refresh" class="quad-link-button">重新整理</button>
+                    <div class="quad-status-line"></div>
+                </div>
             </div>
-
-            <div id="quad-status-line" class="quad-status-line" data-i18n="quad.status.init">初始化中...</div>
 
             <div id="quad-slot-grid" class="quad-slot-grid"></div>
 
-            <div style="display:flex;">
-            <div class="quad-slot-panel">
+            <div style="display:flex; justify-content: space-between;">
+                <div class="quad-individual-panel">
                     <div class="quad-row">
                         <label class="quad-label" for="qs_lang" data-i18n="setting.language">語言</label>
                         <select id="qs_lang">
@@ -477,20 +457,65 @@
                     </div>
 
                     <div class="quad-row">
-                    <label class="quad-label" for="qs_topbar_link" data-i18n="quad.topbarLink">工具列連動</label>
+                        <label class="quad-label" for="qs_topbar_link" data-i18n="quad.topbarLink">工具列連動</label>
 
-                    <div class="quad-name" style="text-align:left;">
-                        <input id="qs_topbar_link" type="checkbox" style="width:18px;height:18px;" checked>
+                        <div class="quad-name" style="text-align:left;">
+                            <input id="qs_topbar_link" type="checkbox" style="width:18px;height:18px;" checked>
+                        </div>
+
+                        <div></div>
                     </div>
-
-                    <div></div>
                 </div>
-            </div>
 
-            <div class="quad-slot-panel">
-                <button id="quad-refresh-btn" data-i18n="setting.refresh">重新整理</button>
-                <button id="quad-confirm-btn" data-i18n="setting.confirm">✔ 確定</button>
-            </div>
+                <div class="quad-individual-panel">
+                    <div class="">
+                        <div></div>
+                        <div class="quad-button-cell">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="">
+                        <div></div>
+                        <div class="quad-button-cell">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="">
+                        <div></div>
+                        <div>
+                            <a id="id_a_downloadTool_win" class="download-btn" data-i18n="setting.downloadTool" href="https://github.com/ChingoLiu/webkvm-quad/releases/download/v1.0.1/JVK202_Quad.exe" download>
+                                下載JVK202_Quad Windows版離線工具
+                            </a>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div></div>
+                        <a id="id_a_downloadTool_mac" class="download-btn" data-i18n="setting.downloadTool" href="https://github.com/ChingoLiu/webkvm-quad/releases/download/v1.0.1/JVK202_Quad.exe" download>
+                                下載JVK202_Quad MacOS版離線工具
+                        </a>
+                    </div>
+                </div>
+
+                <div class="quad-individual-panel">
+                    <div class="quad-row">
+                        <div></div>
+                        <div class="quad-button-cell">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="quad-row">
+                        <div></div>
+                        <div class="quad-button-cell">
+                            <button id="quad-reset-default-btn" data-i18n="setting.resetDefault">恢復預設</button>
+                        </div>
+                    </div>
+                    <div class="quad-row">
+                        <div></div>
+                        <div class="quad-button-cell">
+                            <button id="quad-confirm-btn" data-i18n="setting.confirm">✔ 確定</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -503,12 +528,12 @@
 
         const root = document.getElementById("quad-root");
         const modal = document.getElementById("quad-settings-modal");
-        const openSettingsBtn = document.getElementById("quad-open-settings-btn");
         const slotGrid = document.getElementById("quad-slot-grid");
         const groupSelect = document.getElementById("quad-group-select");
         const statusLine = document.getElementById("quad-status-line");
         const refreshBtn = document.getElementById("quad-refresh-btn");
         const confirmBtn = document.getElementById("quad-confirm-btn");
+        const resetDefaultBtn = document.getElementById("quad-reset-default-btn");
 
         const SLOT_COUNT = 4;
 
@@ -528,8 +553,22 @@
             ["topbar", "st_select_topbarmode"]
         ];
 
+        const QUAD_DEVICE_DEFAULTS = {
+            resolution: "1920x1080",
+            framerate: "60",
+            rotate: "0",
+            mouse_report_mode: "mouse",
+            relative_mouse_speed: "1",
+            scrollspeed: "1",
+            direction: "-1",
+            topbar: "auto"
+        };
+
+        const QUAD_GROUP_DEFAULTS = {
+            topbar_link: "1"
+        };
+
         const GROUP_PLACEHOLDER_VALUE = "0";
-        const GROUP_PLACEHOLDER_TEXT = "請選擇裝置";
 
         let currentGroup = "";
         let quadState = "settings";      // settings / applying / running / device_lost
@@ -671,10 +710,6 @@
             }
         }
 
-        function clearAllParentSlotSettingOptions() {
-            for (let slot = 1; slot <= SLOT_COUNT; slot++) clearParentSlotSettingOptions(slot);
-        }
-
         function applySelectSetting(sel, saved, fallback) {
             const api = S();
             if (api) return api.applySelectValue(sel, saved, fallback);
@@ -685,14 +720,15 @@
             const api = S();
             if (!api || !deviceId) return;
 
-            applySelectSetting(getSelect(`qs_resolution_${slot}`), api.getDeviceSetting(deviceId, "resolution", "1920x1080"), "1920x1080");
-            applySelectSetting(getSelect(`qs_framerate_${slot}`), api.getDeviceSetting(deviceId, "framerate", "60"), "60");
-            applySelectSetting(getSelect(`qs_rotate_${slot}`), api.getDeviceSetting(deviceId, "rotate", "0"), "0");
-            applySelectSetting(getSelect(`qs_mouse_report_mode_${slot}`), api.getDeviceSetting(deviceId, "mouse_report_mode", "pointer"), "pointer");
-            applySelectSetting(getSelect(`qs_relative_mouse_speed_${slot}`), api.getDeviceSetting(deviceId, "relative_mouse_speed", "1"), "1");
-            applySelectSetting(getSelect(`qs_scrollspeed_${slot}`), api.getDeviceSetting(deviceId, "scrollspeed", "1"), "1");
-            applySelectSetting(getSelect(`qs_direction_${slot}`), api.getDeviceSetting(deviceId, "direction", "-1"), "-1");
-            applySelectSetting(getSelect(`qs_topbar_${slot}`), api.getDeviceSetting(deviceId, "topbar", "auto"), "auto");
+            for (const [name] of QUAD_DEVICE_SETTING_MAP) {
+                const sel = getSelect(`qs_${name}_${slot}`);
+                if (!sel) continue;
+
+                const def = QUAD_DEVICE_DEFAULTS[name] ?? "";
+                const saved = api.getDeviceSetting(deviceId, name, def);
+
+                applySelectSetting(sel, saved, def);
+            }
         }
 
         function saveQuadDeviceSetting(slot, name) {
@@ -710,6 +746,130 @@
                     saveQuadDeviceSetting(slot, name);
                 }
             }
+        }
+
+        function hasSelectValue(sel, value) {
+            if (!sel) return false;
+
+            return Array.from(sel.options || []).some(opt => {
+                return opt.value === String(value);
+            });
+        }
+
+        function setParentSelectToDefault(slot, name) {
+            const sel = getSelect(`qs_${name}_${slot}`);
+            if (!sel || !sel.options || sel.options.length === 0) {
+                return "";
+            }
+
+            const def = QUAD_DEVICE_DEFAULTS[name];
+
+            if (def !== undefined && hasSelectValue(sel, def)) {
+                sel.value = String(def);
+            } else {
+                // 例如某些解析度 / FPS 不支援預設值時，就退回目前清單第一個
+                sel.selectedIndex = 0;
+            }
+
+            return sel.value;
+        }
+
+        function saveAndApplyParentSettingToChild(slot, name) {
+            const childMap = QUAD_DEVICE_SETTING_MAP.find(([n]) => n === name);
+            if (!childMap) return false;
+
+            const [, childId] = childMap;
+            const sel = getSelect(`qs_${name}_${slot}`);
+            if (!sel || sel.value === "") return false;
+
+            saveQuadDeviceSetting(slot, name);
+            setChildSelectValue(slot, childId, sel.value, true);
+
+            return true;
+        }
+
+        async function resetQuadSlotSettingsToDefault(slot) {
+            const group = getSelectedGroupId();
+            const deviceId = quadDeviceId(slot, group);
+
+            if (!deviceId) {
+                return false;
+            }
+
+            const api = S();
+            if (!api) {
+                return false;
+            }
+
+            // 固定選項若目前是空的，先補回來
+            fillParentFixedSettingOptions(slot);
+
+            // 1. Resolution 先處理，因為 FPS 清單可能跟解析度有關
+            setParentSelectToDefault(slot, "resolution");
+            saveAndApplyParentSettingToChild(slot, "resolution");
+
+            // 等 child 套用解析度後，再重新抓 FPS option
+            await sleep(250);
+            copyVideoOptionsFromChild(slot);
+
+            // 2. Framerate
+            setParentSelectToDefault(slot, "framerate");
+            saveAndApplyParentSettingToChild(slot, "framerate");
+
+            // 3. 其他 device setting
+            const restNames = [
+                "rotate",
+                "mouse_report_mode",
+                "relative_mouse_speed",
+                "scrollspeed",
+                "direction",
+                "topbar"
+            ];
+
+            for (const name of restNames) {
+                setParentSelectToDefault(slot, name);
+                saveAndApplyParentSettingToChild(slot, name);
+            }
+
+            // 4. 再把目前實際選到的值寫入 local setting
+            //    注意：resolution / framerate 如果預設值不存在，這裡會存實際 fallback 值。
+            for (const [name] of QUAD_DEVICE_SETTING_MAP) {
+                const sel = getSelect(`qs_${name}_${slot}`);
+                if (!sel || sel.value === "") continue;
+
+                api.setDeviceSetting(deviceId, name, sel.value);
+            }
+
+            return true;
+        }
+
+        async function resetCurrentQuadSettingsToDefault() {
+            const group = getSelectedGroupId();
+
+            if (!group) {
+                statusLine.textContent = t("quad.status.selectGroup");
+                return false;
+            }
+
+            console.log("[QUAD_PARENT] reset default:", group);
+
+            // 4 個 slot 依序 reset，避免同時切解析度造成過多 UVC apply
+            for (let slot = 1; slot <= SLOT_COUNT; slot++) {
+                await resetQuadSlotSettingsToDefault(slot);
+            }
+
+            // group setting：Sync toolbar 回到預設 checked
+            const topbarLinkEl = getSelect("qs_topbar_link");
+            if (topbarLinkEl) {
+                topbarLinkEl.checked = QUAD_GROUP_DEFAULTS.topbar_link === "1";
+                saveTopbarLinkForCurrentGroup();
+            }
+
+            refreshAllSlotStatusFromChildren();
+
+            statusLine.textContent = t("quad.status.currentGroup", { group });
+
+            return true;
         }
 
         function loadSharedSettings() {
@@ -824,6 +984,30 @@
         function buildSlotPanels() {
             slotGrid.innerHTML = "";
 
+            const titlePanel = document.createElement("div");
+            titlePanel.className = "quad-title-panel";
+
+            titlePanel.innerHTML = `
+                <div class="quad-slot-header">&nbsp;</div>
+
+                <div class="quad-title-row" data-i18n="setting.deviceSelect">裝置</div>
+                <div class="quad-state-row"><div></div><div>UVC:</div></div>
+                <div class="quad-state-row"><div></div><div>UAC:</div></div>
+                <div class="quad-state-row"><div></div><div>COM:</div></div>
+                <div class="quad-value-row quad-com-auth-value-row"></div>
+
+                <div class="quad-title-row" data-i18n="setting.resolution">解析度</div>
+                <div class="quad-title-row" data-i18n="setting.framerate">幀率</div>
+                <div class="quad-title-row" data-i18n="setting.rotate">旋轉</div>
+                <div class="quad-title-row" data-i18n="setting.mouseReportMode">滑鼠回報率</div>
+                <div class="quad-title-row" data-i18n="setting.relCursorSpeed">相對指標速度</div>
+                <div class="quad-title-row" data-i18n="setting.scrollSpeed">滾輪速度</div>
+                <div class="quad-title-row" data-i18n="setting.scrollDirection">滾輪方向</div>
+                <div class="quad-title-row" data-i18n="setting.topbar">工具列</div>
+            `;
+
+            slotGrid.appendChild(titlePanel);
+
             for (let slot = 1; slot <= SLOT_COUNT; slot++) {
                 const panel = document.createElement("div");
                 panel.className = "quad-slot-panel";
@@ -832,83 +1016,104 @@
                 panel.innerHTML = `
                     <div class="quad-slot-header">JVK202-${slot}</div>
 
-                    <div class="quad-row quad-row-device">
-                        <div class="quad-label" data-i18n="setting.deviceSelect">裝置</div>
+                    <div class="quad-value-row">
                         <div id="qs_device_text_${slot}" class="quad-name">-</div>
-                        <div></div>
                     </div>
 
-                    <div class="quad-row">
-                        <div class="quad-label">UVC :</div>
+                    <div class="quad-value-row quad-state-row">
                         <div id="qs_uvc_name_${slot}" class="quad-name">-</div>
                         <div id="qs_uvc_state_${slot}" class="quad-state unknown">-</div>
                     </div>
 
-                    <div class="quad-row">
-                        <div class="quad-label">UAC :</div>
+                    <div class="quad-value-row quad-state-row">
                         <div id="qs_uac_name_${slot}" class="quad-name">-</div>
                         <div id="qs_uac_state_${slot}" class="quad-state unknown">-</div>
                     </div>
 
-                    <div class="quad-row">
-                        <div class="quad-label">COM :</div>
+                    <div class="quad-value-row quad-state-row">
                         <div id="qs_com_name_${slot}" class="quad-name">-</div>
                         <div id="qs_com_state_${slot}" class="quad-state unknown">-</div>
                     </div>
 
-                    <div class="quad-row quad-com-auth-row">
-                        <div class="quad-label"></div>
+                    <div class="quad-value-row quad-com-auth-value-row">
                         <div></div>
                         <div
                             id="qs_com_auth_${slot}"
                             class="quad-com-auth"
                             data-i18n="device.auth"
-                        >按此連線</div>
+                            style="visibility:hidden; pointer-events:none;"
+                        ></div>
                     </div>
 
-                    <div class="quad-row quad-row-select">
-                        <div class="quad-label" data-i18n="setting.resolution">解析度</div>
+                    <div class="quad-value-row">
                         <select id="qs_resolution_${slot}"></select>
                     </div>
 
-                    <div class="quad-row quad-row-select">
-                        <div class="quad-label" data-i18n="setting.framerate">幀率</div>
+                    <div class="quad-value-row">
                         <select id="qs_framerate_${slot}"></select>
                     </div>
 
-                    <div class="quad-row quad-row-select">
-                        <div class="quad-label" data-i18n="setting.rotate">旋轉</div>
-                        <select id="qs_rotate_${slot}"></select>
+                    <div class="quad-value-row">
+                        <select id="qs_rotate_${slot}">
+                            <option value="0" data-i18n="setting.rotate0">0°</option>
+                            <option value="90" data-i18n="setting.rotate90">90°</option>
+                            <option value="180" data-i18n="setting.rotate180">180°</option>
+                            <option value="270" data-i18n="setting.rotate270">270°</option>
+                        </select>
                     </div>
 
-                    <div class="quad-row quad-row-select">
-                        <div class="quad-label" data-i18n="setting.mouseReportMode">滑鼠回報率</div>
-                        <select id="qs_mouse_report_mode_${slot}"></select>
+                    <div class="quad-value-row">
+                        <select id="qs_mouse_report_mode_${slot}">
+                            <option value="mouse" data-i18n="setting.mouseReportLow">一般模式</option>
+                            <option value="pointer" data-i18n="setting.mouseReportHigh">電競模式</option>
+                        </select>
                     </div>
 
-                    <div class="quad-row quad-row-select">
-                        <div class="quad-label" data-i18n="setting.relCursorSpeed">相對指標速度</div>
-                        <select id="qs_relative_mouse_speed_${slot}"></select>
+                    <div class="quad-value-row">
+                        <select id="qs_relative_mouse_speed_${slot}">
+                            <option value="2.0" data-i18n="setting.relCursorSuperFast">最快</option>
+                            <option value="1.5" data-i18n="setting.relCursorFast">快</option>
+                            <option value="1" selected data-i18n="setting.relCursorMedium">中</option>
+                            <option value="0.7" data-i18n="setting.relCursorSlow">慢</option>
+                            <option value="0.4" data-i18n="setting.relCursorSuperSlow">最慢</option>
+                        </select>
                     </div>
 
-                    <div class="quad-row quad-row-select">
-                        <div class="quad-label" data-i18n="setting.scrollSpeed">滾輪速度</div>
-                        <select id="qs_scrollspeed_${slot}"></select>
+                    <div class="quad-value-row">
+                        <select id="qs_scrollspeed_${slot}">
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
                     </div>
 
-                    <div class="quad-row quad-row-select">
-                        <div class="quad-label" data-i18n="setting.scrollDirection">滾輪方向</div>
-                        <select id="qs_direction_${slot}"></select>
+                    <div class="quad-value-row">
+                        <select id="qs_direction_${slot}">
+                            <option value="-1" selected data-i18n="setting.scrollNormal">一般</option>
+                            <option value="1" data-i18n="setting.scrollReverse">反向</option>
+                        </select>
                     </div>
 
-                    <div class="quad-row quad-row-select">
-                        <div class="quad-label" data-i18n="setting.topbar">工具列</div>
-                        <select id="qs_topbar_${slot}"></select>
+                    <div class="quad-value-row">
+                        <select id="qs_topbar_${slot}">
+                            <option value="auto" selected data-i18n="setting.topbarAuto">自動縮放</option>
+                            <option value="fixed" data-i18n="setting.topbarFixed">固定尺寸</option>
+                        </select>
                     </div>
                 `;
 
                 slotGrid.appendChild(panel);
                 bindSlotPanelEvents(slot);
+            }
+
+            if (typeof applyQuadI18N === "function") {
+                applyQuadI18N(currentLang);
             }
         }
 
@@ -921,13 +1126,13 @@
                     saveQuadDeviceSetting(slot, name);
                     setChildSelectValue(slot, childId, parentEl.value, true);
                 });
+            }
 
-                const comAuthEl = document.getElementById(`qs_com_auth_${slot}`);
-                if (comAuthEl) {
-                    comAuthEl.addEventListener("click", async () => {
-                        await requestQuadComAuth(slot);
-                    });
-                }
+            const comAuthEl = document.getElementById(`qs_com_auth_${slot}`);
+            if (comAuthEl) {
+                comAuthEl.addEventListener("click", async () => {
+                    await requestQuadComAuth(slot);
+                });
             }
         }
 
@@ -1118,6 +1323,51 @@
             for (let slot = 1; slot <= SLOT_COUNT; slot++) {
                 hideChildSettingsModal(slot);
             }
+        }
+
+        async function confirmAllChildSettings() {
+            const results = [];
+
+            for (let slot = 1; slot <= SLOT_COUNT; slot++) {
+                const frame = getFrame(slot);
+                const cw = frame ? frame.contentWindow : null;
+
+                if (!cw || typeof cw.quadApplySettingsConfirm !== "function") {
+                    results.push({
+                        slot,
+                        ok: false,
+                        reason: "quadApplySettingsConfirm not found"
+                    });
+                    continue;
+                }
+
+                try {
+                    const ret = await cw.quadApplySettingsConfirm();
+
+                    results.push({
+                        slot,
+                        ok: !!ret?.ok,
+                        skipped: !!ret?.skipped,
+                        reason: ret?.reason || ""
+                    });
+
+                } catch (err) {
+                    console.warn("[QUAD_PARENT] confirm child settings failed:", {
+                        slot,
+                        err
+                    });
+
+                    results.push({
+                        slot,
+                        ok: false,
+                        reason: String(err && err.message ? err.message : err)
+                    });
+                }
+            }
+
+            console.log("[QUAD_PARENT] confirmAllChildSettings:", results);
+
+            return results;
         }
 
         function copyOptions(srcSel, dstSel) {
@@ -1835,37 +2085,7 @@
             }
         }
 
-        function applyParentSlotSettingsToChildren() {
-            for (let slot = 1; slot <= SLOT_COUNT; slot++) {
-                applyParentSlotSettingsToChild(slot);
-            }
-        }
-
-        async function clickChildApplyButtons() {
-            for (let slot = 1; slot <= SLOT_COUNT; slot++) {
-                const doc = getChildDoc(slot);
-                if (!doc) continue;
-
-                const btn = doc.getElementById("btn-apply-settings");
-
-                if (!btn) {
-                    console.warn("[QUAD_PARENT] btn-apply-settings not found:", slot);
-                    continue;
-                }
-
-                if (btn.disabled) {
-                    console.warn("[QUAD_PARENT] btn-apply-settings disabled:", slot);
-                    continue;
-                }
-
-                console.log("[QUAD_PARENT] click child apply:", slot);
-                btn.click();
-
-                await sleep(250);
-            }
-        }
-
-        function confirmQuadSettings() {
+        async function confirmQuadSettings() {
             saveAllQuadDeviceSettings();
             saveSharedSetting("qs_lang");
             saveSharedSetting("qs_theme");
@@ -1876,6 +2096,8 @@
 
             // 只關閉父層中央設定頁
             modal.style.display = "none";
+
+            await confirmAllChildSettings();
             
             console.log("[QUAD_PARENT] settings modal closed");
         }
@@ -1943,10 +2165,6 @@
                     notifyChildQuadMaximized(oldSlot, false);
                 }
 
-                if (modal.style.display !== "flex") {
-                    openSettingsBtn.style.display = "block";
-                }
-
                 setTimeout(resizeAllChildVideos, 80);
                 return false;
             }
@@ -1966,7 +2184,6 @@
             cell.classList.add("quad-cell-focused");
 
             modal.style.display = "none";
-            openSettingsBtn.style.display = "none";
 
             notifyChildQuadMaximized(slot, true);
 
@@ -2057,11 +2274,13 @@
                 refreshAllSlotStatusFromChildren();
             });
 
-            confirmBtn.addEventListener("click", confirmQuadSettings);
+            confirmBtn.addEventListener("click", async () => {
+                await confirmQuadSettings();
+            });
 
-            if (openSettingsBtn) {
-                openSettingsBtn.addEventListener("click", openQuadSettingsModal);
-            }
+            resetDefaultBtn.addEventListener("click", async () => {
+                await resetCurrentQuadSettingsToDefault();
+            });
 
             document.addEventListener("keydown", (e) => {
                 if (modal.style.display !== "flex") return;
@@ -2145,6 +2364,30 @@
 
             return true;
         }
+
+        function updateDownloadToolVisibility_quad() {
+            const link = document.getElementById("id_a_downloadTool_win");
+            if (!link) return;
+
+            // Electron 環境不要顯示下載工具
+            if (window.electronSerial) {
+                link.style.display = "none";
+            } else {
+                link.style.display = "";
+            }
+
+            const link_mac = document.getElementById("id_a_downloadTool_mac");
+            if (!link_mac) return;
+
+            // Electron 環境不要顯示下載工具
+            if (window.electronSerial) {
+                link_mac.style.display = "none";
+            } else {
+                link_mac.style.display = "";
+            }
+        }
+
+        updateDownloadToolVisibility_quad();
 
         document.addEventListener("DOMContentLoaded", initQuadPage);
     </script>

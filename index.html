@@ -102,11 +102,17 @@
 
     <script>
         document.getElementById("btn-single").addEventListener("click", async () => {
-            await window.electronAppMode.openMode("single");
+            if (window.electronSerial)
+                await window.electronAppMode.openMode("single");
+            else
+                window.location.href = "https://chingoliu.github.io/webkvm-quad/index1.html";
         });
 
         document.getElementById("btn-quad").addEventListener("click", async () => {
-            await window.electronAppMode.openMode("quad");
+            if (window.electronSerial)
+                await window.electronAppMode.openMode("quad");
+            else
+                window.location.href = "https://chingoliu.github.io/webkvm-quad/index4.html";
         });
     </script>
 </body>

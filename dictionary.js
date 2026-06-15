@@ -99,7 +99,6 @@
             'toast.hid_not_configured':     'HID 參數尚未設定, 無法使用\n * 鍵盤\n * 滑鼠\n * 剪貼簿\n * 熱鍵',
             'toast.comport_not_compatible': 'COM埠不符合目前裝置, 請選擇',
 
-
             'quad.title':                   '選擇 JVK202 Quad 裝置群組',
             'quad.status.init':             '初始化中...',
             'quad.status.selectGroup':      '請選擇 Quad 裝置群組',
@@ -112,6 +111,10 @@
             'quad.status.groupLost':        '群組 {group} 不完整，請重新選擇。',
             'quad.status.enumerateFail':    'enumerateDevices 失敗，請查看 Console。',
             'quad.topbarLink':              '工具列連動',
+
+            'mode.subtitle':                '請選擇啟動模式',
+            'mode.single':                  '單機版',
+            'mode.quad':                    'Quad 四分割版',
         },
         'en': {
             'window.title':                 'Window',
@@ -211,7 +214,6 @@
             'toast.hid_not_configured':     'HID parameters are not configured, cannot use\n * Keyboard\n * Mouse\n * Clipboard\n * Hotkey',
             'toast.comport_not_compatible': 'COM port is not compatible with the current device, please select',
 
-
             'quad.title':                   'Select JVK202 Quad Device Group',
             'quad.status.init':             'Initializing...',
             'quad.status.selectGroup':      'Please select a Quad device group',
@@ -224,6 +226,10 @@
             'quad.status.groupLost':        'Group {group} is incomplete. Please select again.',
             'quad.status.enumerateFail':    'enumerateDevices failed. Please check the Console.',
             'quad.topbarLink':              'Sync toolbar',
+
+            'mode.subtitle':                'Select startup mode',
+            'mode.single':                  'Single Device',
+            'mode.quad':                    'Quad View',
         }
     };
 })();

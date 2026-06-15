@@ -6,46 +6,6 @@
     <title>KVIM202 Quad View - Electron</title>
     <link rel="stylesheet" href="./common.css">
     <style>
-        :root {
-            --bg-color: #f5f5fa;
-            --bg-topbar: #f5f5fa;
-            --text-color: #282727;
-            --text-subtle-color: #555;
-            --border-color: #E3E5F0;
-            --btn-bg: #f5f5fa;
-            --btn-bg-hover: #ffc8a5;
-            --btn-text-color: #282727;
-            --btn-shadow-hi: rgba(15, 23, 42, 0.2);
-            --btn-shadow-lo: rgba(255, 255, 255, 0.9);
-            --btn-active-border: #ff8f49;
-            --title-text-color: #5e5e5e;
-            --text-color-placeholder: #808080;
-            --modal-alpha-bg: rgba(100,100,100,0.5);
-            --title-shadow-hi: rgba(255, 255, 255, 0.95);
-            --title-shadow-lo: rgba(100, 100, 106, 0.5);
-            --keyboard-bg: #ddd;
-        }
-
-        :root[data-theme="dark"] {
-            --bg-color: #3b3b3d;
-            --bg-topbar: #3b3b3d;
-            --text-color: #fffefe;
-            --text-subtle-color: #aaa;
-            --border-color: #424657;
-            --btn-bg: #2b2f3a;
-            --btn-bg-hover: #ff8f49;
-            --btn-text-color: #fffefe;
-            --btn-shadow-hi: rgba(15, 15, 15, 0.7);
-            --btn-shadow-lo: rgba(128, 128, 128, 0.7);
-            --btn-active-border: #ff8f49;
-            --title-text-color: #bababa;
-            --text-color-placeholder: #808080;
-            --modal-alpha-bg: rgba(100,100,100,0.5);
-            --title-shadow-hi: rgba(255, 255, 255, 0.10);
-            --title-shadow-lo: rgba(0, 0, 0, 0.55);
-            --keyboard-bg: #505050;
-        }
-
         html, body {
             width: 100vw;
             height: 100vh;
@@ -922,7 +882,22 @@
 
         function buildChildUrl(slot) {
             const url = new URL(childPage, location.href);
+            const api = S();
+
+            let theme = api?.getSharedSetting("theme", "dark") || "dark";
+            let lang = api?.getSharedSetting("lang", "zh-TW") || "zh-TW";
+
+            if (theme !== "light" && theme !== "dark") {
+                theme = "dark";
+            }
+
+            if (!I18N_DICT[lang]) {
+                lang = "zh-TW";
+            }
+
             url.searchParams.set("slot", String(slot));
+            url.searchParams.set("theme", theme);
+            url.searchParams.set("lang", lang);
 
             // 這版不再從 URL 傳 uvcSerial，避免 child 自己自動進入或自動確認。
             // 裝置選擇統一由本頁中央設定頁控制。

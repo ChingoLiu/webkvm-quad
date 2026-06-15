@@ -5,6 +5,23 @@
     <title>j5create Remote Control</title>
     <link rel="icon" type="image/png" href="favicon.png?v=124">
     <link rel="stylesheet" href="./common.css">
+    
+    <script>
+        (function () {
+            const qs = new URLSearchParams(location.search);
+
+            const theme = qs.get("theme");
+            if (theme === "light" || theme === "dark") {
+                document.documentElement.setAttribute("data-theme", theme);
+            }
+
+            const lang = qs.get("lang");
+            if (lang === "zh-TW" || lang === "en") {
+                document.documentElement.setAttribute("lang", lang);
+            }
+        })();
+    </script>
+
     <style>
         /* 1. 所有元素拿掉 focus outline */
         *:focus {
@@ -21,48 +38,6 @@
         input::-moz-focus-inner {
             border: 0;
         }
-
-        /* 預設（明亮）主題 */
-        :root {
-            --bg-color: #f5f5fa;
-            --bg-topbar: #f5f5fa;
-            --text-color: #282727;
-            --text-subtle-color: #555;
-            --border-color: #E3E5F0;
-            --btn-bg: #f5f5fa;
-            --btn-bg-hover: #ffc8a5;
-            --btn-text-color: #282727;
-            --btn-shadow-hi: rgba(15, 23, 42, 0.2);
-            --btn-shadow-lo: rgba(255, 255, 255, 0.9);
-            --btn-active-border: #ff8f49;
-            --title-text-color: #5e5e5e;
-            --text-color-placeholder: #808080;
-            --modal-alpha-bg: rgba(100,100,100,0.5);
-            --title-shadow-hi: rgba(255, 255, 255, 0.95);
-            --title-shadow-lo: rgba(100, 100, 106, 0.5);
-            --keyboard-bg: #ddd;
-        }
-
-        /* 暗灰主題 */
-            :root[data-theme="dark"] {
-                --bg-color: #3b3b3d;
-                --bg-topbar: #3b3b3d;
-                --text-color: #fffefe;
-                --text-subtle-color: #aaa;
-                --border-color: #424657;
-                --btn-bg: #2b2f3a;
-                --btn-bg-hover: #ff8f49;
-                --btn-text-color: #fffefe;
-                --btn-shadow-hi: rgba(15, 15, 15, 0.7);
-                --btn-shadow-lo: rgba(128, 128, 128, 0.7);
-                --btn-active-border: #ff8f49;
-                --title-text-color: #bababa;
-                --text-color-placeholder: #808080;
-                --modal-alpha-bg: rgba(100,100,100,0.5);
-                --title-shadow-hi: rgba(255, 255, 255, 0.10);
-                --title-shadow-lo: rgba(0, 0, 0, 0.55);
-                --keyboard-bg: #505050;
-            }
 
         html {
             background: var(--bg-topbar);
